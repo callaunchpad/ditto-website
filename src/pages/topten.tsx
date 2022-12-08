@@ -9,8 +9,8 @@ export default function TopTen() {
   const getTopTenPokemon = async () => {
     const result: any = await getTopTen();
     let resultArr = [];
-    for (let i = 0; i < 10; i++) {
-      resultArr.push(result[i.toString()]);
+    for (let i = 0; i < Object.keys(result).length; i++) {
+      resultArr.push(result[i]);
     }
     setTopTen(resultArr);
   };
