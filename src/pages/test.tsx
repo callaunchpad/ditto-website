@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image, Spinner } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, Spinner } from "@chakra-ui/react";
 import { useState } from "react";
 
 import { uploadPet } from "../db/utils/pokemon";
@@ -8,6 +8,7 @@ export default function Test() {
   const [imageAsFile, setImageAsFile] = useState(null);
 
   const [resultImageUrl, setResultImageUrl] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const handleImageAsFile = (e: any) => {
     const image = e.target.files[0];
@@ -18,6 +19,7 @@ export default function Test() {
   const handleFireBaseUpload = async (e: any) => {
     e.preventDefault();
     console.log("start of upload");
+    setSubmitted(true)
     // async magic goes here...
     if (imageAsFile === null) {
       console.error(`not an image, the image file is a ${typeof imageAsFile}`);
@@ -26,14 +28,16 @@ export default function Test() {
       console.log(result);
       setResultImageUrl(result.public_url);
     }
+    setSubmitted(false)
   };
 
   return (
     <Box p={4}>
-      <Heading>Upload an image of your pet!</Heading>
-      <form onSubmit={handleFireBaseUpload}>
+      <Flex direction="column" align="center" >
+      <Heading mb={10}>Upload an image of your pet!</Heading>
+      <form style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
         <input type="file" onChange={handleImageAsFile} />
-        <button>Submit</button>
+        <Button isLoading={submitted} onClick={handleFireBaseUpload}>Submit</Button>
       </form>
       <Flex gap={10}>
         {imageAsFile ? (
@@ -52,7 +56,7 @@ export default function Test() {
           <></>
         )}
 
-        {imageAsFile && resultImageUrl == "" ? <Spinner></Spinner> : <></>}
+      </Flex>
       </Flex>
     </Box>
   );

@@ -27,30 +27,32 @@ export default function Battle() {
 
   return (
     <Box p={4}>
-      <Heading>Pick a pokemon that you think is more powerful!</Heading>
-      <Flex gap={10}>
-        <Box>
-          <Image
-            style={{ transition: "all 0.5s" }}
-            _hover={{
-              transform: "scale(1.1)",
-              cursor: "pointer",
-            }}
-            src={firstUrl}
-            onClick={() => submitChoice(0)}
-          ></Image>
-        </Box>
-        <Box>
-          <Image
-            style={{ transition: "all 0.5s" }}
-            _hover={{
-              transform: "scale(1.1)",
-              cursor: "pointer",
-            }}
-            src={secondUrl}
-            onClick={() => submitChoice(1)}
-          ></Image>
-        </Box>
+      <Flex direction="column" align="center">
+        <Heading mb={10}>Who wins?</Heading>
+        <Flex gap={10}>
+          <Box>
+            <Image
+              style={{ transition: "all 0.5s" }}
+              _hover={{
+                transform: "scale(1.1)",
+                cursor: "pointer",
+              }}
+              src={firstUrl}
+              onClick={() => submitChoice(0)}
+            ></Image>
+          </Box>
+          <Box>
+            <Image
+              style={{ transition: "all 0.5s" }}
+              _hover={{
+                transform: "scale(1.1)",
+                cursor: "pointer",
+              }}
+              src={secondUrl}
+              onClick={() => submitChoice(1)}
+            ></Image>
+          </Box>
+        </Flex>
       </Flex>
     </Box>
   );

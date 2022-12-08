@@ -6,6 +6,7 @@ const apiToken = process.env.NEXT_PUBLIC_API_TOKEN;
 
 export const uploadPet = (file: File) => {
 
+
   return getData('/numpokemon/').then((response) => {
 
     const fileName = `Pet${response + 1}.${file.name.split('.').pop()}`;
@@ -24,8 +25,6 @@ export const uploadPet = (file: File) => {
 
 
 export const getRandomTwo = () => {
-
-  console.log(apiToken)
 
   return getData('/randomtwo/').then((response) => {
     return response;
