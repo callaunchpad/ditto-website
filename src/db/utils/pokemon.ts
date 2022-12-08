@@ -56,7 +56,8 @@ async function postData(url = '', data = {}) {
     credentials: 'include', 
     headers: {
       'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${apiToken}`
+      'Authorization' : `Bearer ${apiToken}`,
+      'Content-Security-Policy': 'upgrade-insecure-requests'
     },
     body: JSON.stringify(data) 
   });
@@ -69,7 +70,8 @@ async function getData(url = '') {
     credentials: 'include', 
     headers: {
       'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${apiToken}`
+      'Authorization' : `Bearer ${apiToken}`,
+      'Content-Security-Policy': 'upgrade-insecure-requests'
     }
   });
   return response.json();
