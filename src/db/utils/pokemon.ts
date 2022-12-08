@@ -6,14 +6,14 @@ const apiToken = process.env.NEXT_PUBLIC_API_TOKEN;
 
 export const uploadPet = (file: File) => {
 
-  return getData('/numpokemon').then((response) => {
+  return getData('/numpokemon/').then((response) => {
 
     const fileName = `Pet${response + 1}.${file.name.split('.').pop()}`;
     const storageRef = ref(storage, `Pets/${fileName}`);
 
     return uploadBytes(storageRef, file).then((snapshot) => {
       console.log('Uploaded a blob or file!' + fileName);
-      return postData('/generate', { name: fileName })
+      return postData('/generate/', { name: fileName })
       .then((data) => {
         console.log(data); 
         return data
@@ -27,7 +27,7 @@ export const getRandomTwo = () => {
 
   console.log(apiToken)
 
-  return getData('/randomtwo').then((response) => {
+  return getData('/randomtwo/').then((response) => {
     return response;
   })
 }
@@ -35,7 +35,7 @@ export const getRandomTwo = () => {
 // WINNER = 0 means name1 won, WINNER = 1 means name2 won
 export const updateElo = (name1: String, name2: String, winner: Number) => {
 
-  postData('/updateelo', {name1: name1, name2: name2, winner: winner}).then((data) => {
+  postData('/updateelo/', {name1: name1, name2: name2, winner: winner}).then((data) => {
     console.log(data);
   })
 
@@ -43,7 +43,7 @@ export const updateElo = (name1: String, name2: String, winner: Number) => {
 
 export const getTopTen = () => {
 
-  return getData('/topten').then((data) => {
+  return getData('/topten/').then((data) => {
     console.log(data)
     return data;
   })
@@ -53,11 +53,11 @@ export const getTopTen = () => {
 async function postData(url = '', data = {}) {
   const response = await fetch(apiUrl + url, {
     method: 'POST', 
-    credentials: 'include', 
+    //credentials: 'include', 
     headers: {
       'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${apiToken}`,
-      'Content-Security-Policy': 'upgrade-insecure-requests'
+      //'Authorization' : `Bearer ${apiToken}`,
+      //'Content-Security-Policy': 'upgrade-insecure-requests'
     },
     body: JSON.stringify(data) 
   });
@@ -67,11 +67,11 @@ async function postData(url = '', data = {}) {
 async function getData(url = '') {
   const response = await fetch(apiUrl + url, {
     method: 'GET', 
-    credentials: 'include', 
+    //credentials: 'include', 
     headers: {
       'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${apiToken}`,
-      'Content-Security-Policy': 'upgrade-insecure-requests'
+      //'Authorization' : `Bearer ${apiToken}`,
+      //'Content-Security-Policy': 'upgrade-insecure-requests'
     }
   });
   return response.json();
